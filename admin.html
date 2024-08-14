@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Seat Allocation</title>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+      import { getFirestore, collection, setDoc, doc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBSbdJSZJnzeu57NKTJwTo5XYYEADOIOqY",
+        authDomain: "minor-project-223b4.firebaseapp.com",
+        projectId: "minor-project-223b4",
+        storageBucket: "minor-project-223b4.appspot.com",
+        messagingSenderId: "432413011174",
+        appId: "1:432413011174:web:19fd1011d45e7ad4945f27",
+        measurementId: "G-1KFXWD4CM9"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Function to generate and save seats
+      window.generateAndSaveSeats = async function() {
+        const rows = parseInt(document.getElementById('rows').value);
+        const columns = parseInt(document.getElementById('columns').value);
+        const numStudents = parseInt(document.getElementById('numStudents').value);
+        const rollNumberStart = parseInt(document.getElementById('rollNumberStart').value);
+        const rollNumberEnd = parseInt(document.getElementById('rollNumberEnd').value);
+
+        if (isNaN(rows) || isNaN(columns) || isNaN(numStudents) || isNaN(rollNumberStart) || isNaN(rollNumberEnd)) {
+          alert('Please enter valid numbers.');
+          return;
+        }
+
+        const totalSeats = rows * columns;
+        const numAvailableSeats = Math.min(numStudents, totalSeats);
+
+        let seatNumber = 0;
+
+        for (let i = 0; i < numAvailableSeats; i++) {
+          const rollNumber = (rollNumberStart + i).toString();
+          const hall = `Hall 1`;
+          const row = `Row ${Math.floor(seatNumber / columns) + 1}`;
+          const column = `Column ${seatNumber % columns + 1}`;
+          seatNumber++;
+
+          await setDoc(doc(db, "seats", rollNumber), {
+            rollNumber: rollNumber,
+            hall: hall,
+            row: row,
+            column: column,
+            totalRows: rows,
+            totalColumns: columns
+          });
+        }
+
+        alert('Seats generated and saved successfully!');
+      }
+    </script>
+</head>
+<body>
+    <h2>Admin: Generate and Save Seats</h2>
+    <label for="rows">Number of Rows:</label>
+    <input type="number" id="rows"><br>
+    <label for="columns">Number of Columns:</label>
+    <input type="number" id="columns"><br>
+    <label for="numStudents">Number of Students:</label>
+    <input type="number" id="numStudents"><br>
+    <label for="rollNumberStart">Starting Roll Number:</label>
+    <input type="number" id="rollNumberStart"><br>
+    <label for="rollNumberEnd">Ending Roll Number:</label>
+    <input type="number" id="rollNumberEnd"><br>
+    <button onclick="generateAndSaveSeats()">Generate Seats</button>
+</body>
+</html>

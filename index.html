@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Seat Allotment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+      import { getFirestore, collection, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBSbdJSZJnzeu57NKTJwTo5XYYEADOIOqY",
+        authDomain: "minor-project-223b4.firebaseapp.com",
+        projectId: "minor-project-223b4",
+        storageBucket: "minor-project-223b4.appspot.com",
+        messagingSenderId: "432413011174",
+        appId: "1:432413011174:web:19fd1011d45e7ad4945f27",
+        measurementId: "G-1KFXWD4CM9"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      window.fetchSeatDetails = async function(rollNumber) {
+        try {
+          const seatDoc = await getDoc(doc(db, "seats", rollNumber));
+          if (seatDoc.exists()) {
+            return seatDoc.data();
+          } else {
+            throw new Error("No such document!");
+          }
+        } catch (error) {
+          console.error("Error fetching seat details: ", error);
+          throw error;
+        }
+      }
+    </script>
+</head>
+<body>
+    <h2>User: Scan QR Code</h2>
+    <div id="scannerContainer">
+        <video id="preview" autoplay></video>
+        <div class="scanning-line" id="scanningLine"></div>
+        <div id="scanOutput">Scan the QR code to display seat information</div>
+        <button id="startScanBtn">Scan New QR Code</button>
+    </div>
+    <div id="seatInfo">
+        <h3>Seat Information</h3>
+        <p><strong>Roll Number:</strong> <span id="rollNumber">N/A</span></p>
+        <p><strong>Hall:</strong> <span id="hallName">N/A</span></p>
+        <p><strong>Row:</strong> <span id="row">N/A</span></p>
+        <p><strong>Column:</strong> <span id="column">N/A</span></p>
+    </div>
+    <div id="seatDisplay">
+        <h3>Seat Position</h3>
+        <div id="seatImage">
+            <!-- Seat positions will be displayed here -->
+        </div>
+    </div>
+    <div id="errorMsg"></div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let video = document.getElementById('preview');
+        let scanningLine = document.getElementById('scanningLine');
+        let startScanBtn = document.getElementById('startScanBtn');
+        let scanOutput = document.getElementById('scanOutput');
+        let seatImage = document.getElementById('seatImage');
+        let scanning = true;
+
+        function startScan() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                    scanning = true;
+                    scanningLine.style.display = 'block';
+                    startScanBtn.style.display = 'none';
+                    scanOutput.style.display = 'block';
+                    scanOutput.innerText = "Scanning...";
+
+                    function scanQRCode() {
+                        if (!scanning) return;
+
+                        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                            let canvas = document.createElement('canvas');
+                            let context = canvas.getContext('2d');
+                            canvas.height = video.videoHeight;
+                            canvas.width = video.videoWidth;
+                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                            let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                            let code = jsQR(imageData.data, imageData.width, imageData.height);
+
+                            if (code) {
+                                scanning = false;
+                                video.srcObject.getTracks().forEach(track => track.stop());
+                                scanningLine.style.display = 'none';
+                                startScanBtn.style.display = 'block';
+                                scanOutput.innerText = "QR Code Detected!";
+                                displayScannedData(code.data);
+                            }
+                        }
+
+                        if (scanning) {
+                            requestAnimationFrame(scanQRCode);
+                        }
+                    }
+
+                    requestAnimationFrame(scanQRCode);
+
+                }).catch(function(error) {
+                    document.getElementById('errorMsg').innerText = 'Error accessing camera: ' + error;
+                });
+            } else {
+                document.getElementById('errorMsg').innerText = 'getUserMedia not supported in this browser.';
+            }
+        }
+
+        async function displayScannedData(data) {
+            console.log('QR Code Data:', data);
+            try {
+                // Extract the roll number and remove leading zeros
+                let rollNumber = data.split('/').pop().replace(/^0+/, ''); // Remove leading zeros
+                console.log('Processed Roll Number:', rollNumber); // For debugging
+                
+                document.getElementById('rollNumber').innerText = rollNumber;
+
+                let seatDetails = await fetchSeatDetails(rollNumber);
+
+                document.getElementById('hallName').innerText = seatDetails.hall || 'N/A';
+                document.getElementById('row').innerText = seatDetails.row || 'N/A';
+                document.getElementById('column').innerText = seatDetails.column || 'N/A';
+
+                // Display seat position as an image
+                seatImage.innerHTML = generateSeatImage(seatDetails.hall, seatDetails.row, seatDetails.column, seatDetails.totalRows, seatDetails.totalColumns);
+            } catch (e) {
+                document.getElementById('errorMsg').innerText = "Error processing QR Code data.";
+                console.error(e);
+            }
+        }
+
+        function generateSeatImage(hall, row, column, totalRows, totalColumns) {
+            let seatLayout = "";
+
+            for (let r = 1; r <= totalColumns; r++) {
+                for (let c = 1; c <= totalRows; c++) {
+                    let seatClass = (row === `Row ${r}` && column === `Column ${c}`) ? 'seat occupied' : 'seat';
+                    seatLayout += `<div class="${seatClass}">${r}${c}</div>`;
+                }
+                seatLayout += "<br>";
+            }
+            return seatLayout;
+        }
+
+        startScanBtn.addEventListener('click', () => {
+            startScan();
+        });
+
+        startScan(); // Start scanning immediately when the page loads
+    });
+    </script>
+</body>
+</html>
