@@ -39,13 +39,19 @@
     </script>
 </head>
 <body>
-    <h2>User: Scan QR Code</h2>
+    <header>
+        <img src="images/logo.png" alt="College Logo" id="collegeLogo">
+    </header>
+    
+    <h2>Scan QR Code to View Your Seat</h2>
+    
     <div id="scannerContainer">
         <video id="preview" autoplay></video>
         <div class="scanning-line" id="scanningLine"></div>
         <div id="scanOutput">Scan the QR code to display seat information</div>
         <button id="startScanBtn">Scan New QR Code</button>
     </div>
+    
     <div id="seatInfo">
         <h3>Seat Information</h3>
         <p><strong>Roll Number:</strong> <span id="rollNumber">N/A</span></p>
@@ -53,12 +59,12 @@
         <p><strong>Row:</strong> <span id="row">N/A</span></p>
         <p><strong>Column:</strong> <span id="column">N/A</span></p>
     </div>
+    
     <div id="seatDisplay">
         <h3>Seat Position</h3>
-        <div id="seatImage">
-            <!-- Seat positions will be displayed here -->
-        </div>
+        <div id="seatImage"></div>
     </div>
+    
     <div id="errorMsg"></div>
 
     <script>

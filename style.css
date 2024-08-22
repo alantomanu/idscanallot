@@ -1,98 +1,222 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
 }
-h2 {
-    margin-top: 20px;
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    animation: slideDown 0.7s ease-in-out;
 }
-#preview {
-    width: 20%;
-    height: auto;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    display: block;
-    position: relative;
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+#collegeLogo {
+    width: 300px; /* Increase or adjust this value as needed */
+    height: auto; /* This keeps the aspect ratio of the image */
+    margin-right: 15px;
 
 }
-#seatInfo {
-    display: none;
-    margin-top: 20px;
+h1 {
+    font-size: 24px;
+    color: #333;
 }
-#errorMsg {
-    color: red;
+
+h2 {
     margin-top: 20px;
+    font-size: 22px;
+    color: #555;
 }
+
 #scannerContainer {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     height: auto;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
+    background-color: #000;
+    border-radius: 10px;
     overflow: hidden;
+    margin: 20px 0;
+    padding: 10px;
+    animation: zoomIn 0.7s ease-in-out;
 }
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
 #preview {
     width: 100%;
     height: auto;
+    border-radius: 10px;
 }
+
 .scanning-line {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: green;
+    background-color: lime;
     animation: scanning 2s infinite;
 }
+
 @keyframes scanning {
     0% { top: 0; }
     50% { top: calc(100% - 2px); }
     100% { top: 0; }
 }
+
 #startScanBtn {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 10px;
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
-    display: none;
-}
-#scanOutput {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
     border-radius: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s ease;
 }
+
+#startScanBtn:hover {
+    background-color: #0056b3;
+}
+
+#seatInfo {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    animation: fadeInUp 0.7s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+#seatInfo h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #444;
+}
+
+#seatInfo p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+}
+
 #seatDisplay {
     margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.7s ease-in-out;
 }
+
+#seatDisplay h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #444;
+}
+
 #seatImage {
-    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+    gap: 10px;
+    width: 100%;
 }
+
 .seat {
     width: 30px;
     height: 30px;
-    margin: 5px;
     background-color: #ccc;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 5px;
-    text-align: center;
-    line-height: 30px;
+    font-size: 14px;
+    color: #333;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.seat:hover {
+    transform: scale(1.1);
+}
+
 .occupied {
     background-color: red;
+}
+
+#errorMsg {
+    color: red;
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    #scannerContainer {
+        max-width: 60%;
+        max-height:100% ;
+    }
+    
+    #seatInfo, #seatDisplay {
+        max-width: 90%;
+    }
+    
+    #collegeLogo {
+        width: 200px; /* Increase or adjust this value as needed */
+        height: auto; /* This keeps the aspect ratio of the image */
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+    
+    h2 {
+        font-size: 18px;
+    }
+    
+    .seat {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    
+    #seatImage {
+        gap: 5px;
+    }
 }
