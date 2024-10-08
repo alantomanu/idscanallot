@@ -149,17 +149,18 @@
         }
 
         function generateSeatImage(hall, row, column, totalRows, totalColumns) {
-            let seatLayout = "";
+    let seatLayout = "";
 
-            for (let r = 1; r <= totalColumns; r++) {
-                for (let c = 1; c <= totalRows; c++) {
-                    let seatClass = (row === `Row ${r}` && column === `Column ${c}`) ? 'seat occupied' : 'seat';
-                    seatLayout += `<div class="${seatClass}">${r}${c}</div>`;
-                }
-                seatLayout += "<br>";
-            }
-            return seatLayout;
+    for (let c = 1; c <= totalRows; c++) {
+        for (let r = 1; r <= totalColumns; r++) {
+            let seatClass = (row === `Row ${c}` && column === `Column ${r}`) ? 'seat occupied' : 'seat';
+            seatLayout += `<div class="${seatClass}">${r}${c}</div>`;
         }
+        seatLayout += "<br>";
+    }
+    return seatLayout;
+}
+
 
         startScanBtn.addEventListener('click', () => {
             startScan();
