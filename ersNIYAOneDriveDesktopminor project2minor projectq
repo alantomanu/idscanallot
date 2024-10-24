@@ -1,0 +1,29 @@
+[33mcommit db425d0403302579acfb27c04b355f87954627a7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Alanto Manu <alantomanu501@gmail.com>
+Date:   Thu Oct 24 10:18:38 2024 +0530
+
+    edit in index
+
+[33mcommit 572059f99a5e87a592cc69ee11e58510a1dd47f9[m
+Author: Alanto Manu <alantomanu501@gmail.com>
+Date:   Tue Oct 8 12:37:32 2024 +0530
+
+    in the display rowcolumn format changed to roll number
+
+[33mcommit 7d18096351c018c41b05ef45bf5ef9894053ffd3[m
+Author: Alanto Manu <alantomanu501@gmail.com>
+Date:   Tue Oct 8 11:26:11 2024 +0530
+
+    changed the layout of generated seatimage function in index.html
+
+[33mcommit ea6cc9cb8ca2c7440f4616271468768d77037099[m
+Author: Alanto Manu <alantomanu501@gmail.com>
+Date:   Thu Aug 22 12:18:08 2024 +0530
+
+    changed the user interface and added visual seat arrangement
+
+[33mcommit 19885115f84f5430f4f07d0477b07b46a43d1a18[m
+Author: Alanto Manu <alantomanu501@gmail.com>
+Date:   Wed Aug 14 11:48:03 2024 +0530
+
+    Just created the base of this project
