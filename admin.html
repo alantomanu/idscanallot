@@ -22,63 +22,80 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Function to generate and save seats
+        // Function to generate and save seats with skipping absent roll numbers
         window.generateAndSaveSeats = async function() {
-    const rows = parseInt(document.getElementById('rows').value);
-    const columns = parseInt(document.getElementById('columns').value);
-    const numStudents = parseInt(document.getElementById('numStudents').value);
-    const rollNumberStart = parseInt(document.getElementById('rollNumberStart').value);
-    
-    if (isNaN(rows) || isNaN(columns) || isNaN(numStudents) || isNaN(rollNumberStart)) {
-        alert('Please enter valid numbers.');
-        return;
-    }
+            const rows = parseInt(document.getElementById('rows').value);
+            const columns = parseInt(document.getElementById('columns').value);
+            const numStudents = parseInt(document.getElementById('numStudents').value);
+            const rollNumberStart = parseInt(document.getElementById('rollNumberStart').value);
+            const absentRolls = document.getElementById('absentRolls').value
+                .split(',')
+                .map(roll => roll.trim()) // Remove any spaces around roll numbers
+                .map(Number); // Convert to numbers
 
-    const totalSeats = rows * columns;
-    const numAvailableSeats = Math.min(numStudents, totalSeats);
-    let seatNumber = 0;
-    let rollNumber = rollNumberStart;
-
-    for (let row = 1; row <= rows; row++) {
-        for (let column = 1; column <= columns; column++) {
-            if (seatNumber >= numAvailableSeats) {
-                alert('All requested seats have been assigned.');
+            if (isNaN(rows) || isNaN(columns) || isNaN(numStudents) || isNaN(rollNumberStart)) {
+                alert('Please enter valid numbers.');
                 return;
             }
 
-            const hall = `Hall 1`;
-            const seatRow = `Row ${row}`;
-            const seatColumn = `Column ${column}`;
+            const totalSeats = rows * columns;
+            const numAvailableSeats = Math.min(numStudents, totalSeats);
+            let seatNumber = 0;
+            let rollNumber = rollNumberStart;
 
-            await setDoc(doc(db, "seats", rollNumber.toString()), {
-                rollNumber: rollNumber.toString(),
-                hall: hall,
-                row: seatRow,
-                column: seatColumn,
-                totalRows: rows,
-                totalColumns: columns
-            });
+            for (let column = 1; column <= columns; column++) {
+                for (let row = 1; row <= rows; row++) {
+                    if (seatNumber >= numAvailableSeats) {
+                        alert('All requested seats have been assigned.');
+                        return;
+                    }
 
-            rollNumber++;
-            seatNumber++;
+                    // Skip absent roll numbers
+                    while (absentRolls.includes(rollNumber)) {
+                        rollNumber++;
+                    }
+
+                    const hall = "Hall 1";
+                    const seatRow = `Row ${row}`;
+                    const seatColumn = `Column ${column}`;
+
+                    await setDoc(doc(db, "seats", rollNumber.toString()), {
+                        rollNumber: rollNumber.toString(),
+                        hall: hall,
+                        row: seatRow,
+                        column: seatColumn,
+                        totalRows: rows,
+                        totalColumns: columns
+                    });
+
+                    rollNumber++;
+                    seatNumber++;
+                }
+            }
+
+            alert('Seats generated and saved successfully!');
         }
-    }
-
-    alert('Seats generated and saved successfully!');
-}
 
     </script>
 </head>
 <body>
     <h2>Admin: Generate and Save Seats</h2>
+
     <label for="rows">Number of Rows:</label>
     <input type="number" id="rows"><br>
+
     <label for="columns">Number of Columns:</label>
     <input type="number" id="columns"><br>
+
     <label for="numStudents">Number of Students:</label>
     <input type="number" id="numStudents"><br>
+
     <label for="rollNumberStart">Starting Roll Number:</label>
     <input type="number" id="rollNumberStart"><br>
+
+    <label for="absentRolls">Absent Roll Numbers (comma-separated):</label>
+    <input type="text" id="absentRolls" placeholder="e.g., 4, 7, 10"><br>
+
     <button onclick="generateAndSaveSeats()">Generate Seats</button>
 </body>
 </html>
