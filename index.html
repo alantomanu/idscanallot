@@ -59,13 +59,20 @@
         <img src="images/logo.png" alt="College Logo sjcet" id="collegeLogo">
     </header>
     
-    <h2>Scan QR Code to View Your Seat</h2>
+    <h2>Scan QR Code to View Your Seat or Enter Student ID</h2>
     
     <div id="scannerContainer">
         <video id="preview" autoplay></video>
         <div class="scanning-line" id="scanningLine"></div>
         <div id="scanOutput">Scan the QR code to display seat information</div>
         <button id="startScanBtn">Scan New QR Code</button>
+    </div>
+
+    <!-- Manual Input for Student ID -->
+    <div id="manualInputContainer">
+        <h3>Enter Student ID</h3>
+        <input type="text" id="studentIdInput" placeholder="Enter Student ID">
+        <button id="submitStudentIdBtn">Submit</button>
     </div>
     
     <div id="seatInfo">
@@ -179,7 +186,7 @@
                     let seatClass = (selectedRow === `Row ${row}` && selectedColumn === `Column ${column}`) ? 'seat occupied' : 'seat';
 
                     // Use the roll number for the seat content instead of row and column number
-                    seatLayout += `<div class="${seatClass}">${rollNumber || 'Empty'}</div>`;
+                    seatLayout += `<div class="${seatClass}">${rollNumber || 'nil'}</div>`;
                 }
                 seatLayout += "<br>";  // Add a line break after each row
             }
@@ -189,6 +196,16 @@
 
         startScanBtn.addEventListener('click', () => {
             startScan();
+        });
+
+        // Handle manual student ID input
+        document.getElementById('submitStudentIdBtn').addEventListener('click', () => {
+            const studentId = document.getElementById('studentIdInput').value;
+            if (studentId) {
+                displayScannedData(studentId);  // Treat it like QR code data
+            } else {
+                document.getElementById('errorMsg').innerText = 'Please enter a valid student ID.';
+            }
         });
 
         startScan(); // Start scanning immediately when the page loads
