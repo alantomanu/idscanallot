@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('images/5657034.jpg'); /* Background image from your folder */
+    background-image: url('images/bag1.jpg'); /* Background image from your folder */
     background-size: cover; /* Ensures the image covers the entire background */
     background-position: center; /* Centers the background image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
