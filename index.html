@@ -7,51 +7,50 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-      import { getFirestore, collection, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getFirestore, collection, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBSbdJSZJnzeu57NKTJwTo5XYYEADOIOqY",
-        authDomain: "minor-project-223b4.firebaseapp.com",
-        projectId: "minor-project-223b4",
-        storageBucket: "minor-project-223b4.appspot.com",
-        messagingSenderId: "432413011174",
-        appId: "1:432413011174:web:19fd1011d45e7ad4945f27",
-        measurementId: "G-1KFXWD4CM9"
-      };
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSbdJSZJnzeu57NKTJwTo5XYYEADOIOqY",
+            authDomain: "minor-project-223b4.firebaseapp.com",
+            projectId: "minor-project-223b4",
+            storageBucket: "minor-project-223b4.appspot.com",
+            messagingSenderId: "432413011174",
+            appId: "1:432413011174:web:19fd1011d45e7ad4945f27",
+            measurementId: "G-1KFXWD4CM9"
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-      window.fetchSeatDetails = async function(rollNumber) {
-        try {
-          const seatDoc = await getDoc(doc(db, "seats", rollNumber));
-          if (seatDoc.exists()) {
-            return seatDoc.data();
-          } else {
-            throw new Error("No such document!");
-          }
-        } catch (error) {
-          console.error("Error fetching seat details: ", error);
-          throw error;
-        }
-      };
-      
-      // Fetch all seat details and map them
-      window.fetchAllSeatDetails = async function() {
-        const seatsRef = collection(db, "seats");
-        const seatsSnapshot = await getDocs(seatsRef);
-        const seatMap = {};
+        window.fetchSeatDetails = async function(rollNumber) {
+            try {
+                const seatDoc = await getDoc(doc(db, "seats", rollNumber));
+                if (seatDoc.exists()) {
+                    return seatDoc.data();
+                } else {
+                    throw new Error("No such document!");
+                }
+            } catch (error) {
+                console.error("Error fetching seat details: ", error);
+                throw error;
+            }
+        };
 
-        seatsSnapshot.forEach(doc => {
-          const data = doc.data();
-          const row = data.row.replace('Row ', '');  // Extract numeric row
-          const column = data.column.replace('Column ', '');  // Extract numeric column
-          seatMap[`${row}-${column}`] = data.rollNumber;  // Store roll number with row-column as key
-        });
+        window.fetchAllSeatDetails = async function() {
+            const seatsRef = collection(db, "seats");
+            const seatsSnapshot = await getDocs(seatsRef);
+            const seatMap = {};
 
-        return seatMap;
-      };
+            seatsSnapshot.forEach(doc => {
+                const data = doc.data();
+                const row = data.row.replace('Row ', '');
+                const column = data.column.replace('Column ', '');
+                seatMap[`${row}-${column}`] = data.rollNumber;
+            });
+
+            return seatMap;
+        };
     </script>
 </head>
 <body>
@@ -71,8 +70,9 @@
     <!-- Manual Input for Student ID -->
     <div id="manualInputContainer">
         <h3>Enter Student ID</h3>
-        <input type="text" id="studentIdInput" placeholder="Enter Student ID">
+        <input type="text" id="studentIdInput" placeholder="Enter Student ID (e.g., 21/es/001)">
         <button id="submitStudentIdBtn">Submit</button>
+        <p id="errorMsg"></p>
     </div>
     
     <div id="seatInfo">
@@ -87,8 +87,6 @@
         <h3>Seat Position</h3>
         <div id="seatImage"></div>
     </div>
-    
-    <div id="errorMsg"></div>
 
     <script>
     document.addEventListener('DOMContentLoaded', (event) => {
@@ -151,21 +149,16 @@
         async function displayScannedData(data) {
             console.log('QR Code Data:', data);
             try {
-                // Extract the roll number and remove leading zeros
-                let rollNumber = data.split('/').pop().replace(/^0+/, ''); // Remove leading zeros
-                console.log('Processed Roll Number:', rollNumber); // For debugging
-                
+                let rollNumber = data.split('/').pop().replace(/^0+/, '');
                 document.getElementById('rollNumber').innerText = rollNumber;
 
                 let seatDetails = await fetchSeatDetails(rollNumber);
-
                 document.getElementById('hallName').innerText = seatDetails.hall || 'N/A';
                 document.getElementById('row').innerText = seatDetails.row || 'N/A';
                 document.getElementById('column').innerText = seatDetails.column || 'N/A';
 
-                // Await the result of generateSeatImage and then set the innerHTML
                 const seatLayout = await generateSeatImage(seatDetails.hall, seatDetails.row, seatDetails.column, seatDetails.totalRows, seatDetails.totalColumns);
-                seatImage.innerHTML = seatLayout;  // Set the seat layout here
+                seatImage.innerHTML = seatLayout;
             } catch (e) {
                 document.getElementById('errorMsg').innerText = "Error processing QR Code data.";
                 console.error(e);
@@ -174,21 +167,16 @@
 
         async function generateSeatImage(hall, selectedRow, selectedColumn, totalRows, totalColumns) {
             let seatLayout = "";
-            const seatMap = await fetchAllSeatDetails();  // Fetch all seat data from Firebase
+            const seatMap = await fetchAllSeatDetails();
 
-            // Iterate over the rows and columns to create the seat layout
             for (let row = 1; row <= totalRows; row++) {
                 for (let column = 1; column <= totalColumns; column++) {
-                    const seatKey = `${row}-${column}`;  // Generate a unique key for each seat
-                    const rollNumber = seatMap[seatKey] || '';  // Fetch the roll number for the seat, if available
-
-                    // Highlight the specific seat based on selectedRow and selectedColumn
+                    const seatKey = `${row}-${column}`;
+                    const rollNumber = seatMap[seatKey] || '';
                     let seatClass = (selectedRow === `Row ${row}` && selectedColumn === `Column ${column}`) ? 'seat occupied' : 'seat';
-
-                    // Use the roll number for the seat content instead of row and column number
                     seatLayout += `<div class="${seatClass}">${rollNumber || 'nil'}</div>`;
                 }
-                seatLayout += "<br>";  // Add a line break after each row
+                seatLayout += "<br>";
             }
 
             return seatLayout;
@@ -198,17 +186,19 @@
             startScan();
         });
 
-        // Handle manual student ID input
         document.getElementById('submitStudentIdBtn').addEventListener('click', () => {
             const studentId = document.getElementById('studentIdInput').value;
-            if (studentId) {
-                displayScannedData(studentId);  // Treat it like QR code data
+            const validIdPattern = /^\d{2}\/[a-zA-Z]{2}\/\d{3}$/;
+
+            if (validIdPattern.test(studentId)) {
+                displayScannedData(studentId);
+                document.getElementById('errorMsg').innerText = '';  // Clear any previous error messages
             } else {
-                document.getElementById('errorMsg').innerText = 'Please enter a valid student ID.';
+                document.getElementById('errorMsg').innerText = 'Please enter a valid Student ID in the format 21/es/001.';
             }
         });
 
-        startScan(); // Start scanning immediately when the page loads
+        startScan();
     });
     </script>
 </body>
