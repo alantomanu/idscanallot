@@ -212,6 +212,16 @@
     function toggleShadow(button) {
     button.classList.toggle("clicked");
   }
+  function onQRCodeDetected() {
+        const scannerContainer = document.getElementById('scannerContainer');
+        scannerContainer.style.animation = 'none'; // Stop the animation
+        // Optionally, you can add logic here to show the detected QR code result or perform other actions
+    }
+
+    // Simulate QR code detection for demonstration (replace with actual QR detection logic)
+    setTimeout(() => {
+        onQRCodeDetected(); // Call the function after 5 seconds for demo purposes
+    }, 5000);
     </script>
 </body>
 </html>
