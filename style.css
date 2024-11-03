@@ -1,5 +1,10 @@
 /* Background gradient */
-body {
+/* Disable text selection and set default cursor */
+* {
+    cursor: default; /* Changes to arrow cursor */
+    user-select: none; /* Prevents text selection */
+  }
+  body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
