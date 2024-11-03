@@ -68,12 +68,20 @@
     </div>
 
     <!-- Manual Input for Student ID -->
+    <h3>Enter Student ID</h3>
     <div id="manualInputContainer">
-        <h3>Enter Student ID</h3>
-        <input type="text" id="studentIdInput" placeholder="Enter Student ID (e.g., 21/es/001)">
-        <button id="submitStudentIdBtn">Submit</button>
-        <p id="errorMsg"></p>
+        
+       
+        <input placeholder="enter student id..." id="studentIdInput" class="input" name="text" type="text" />   
+<button class="btn-17" id="submitStudentIdBtn"  onclick="toggleShadow(this)">
+  <span class="text-container">
+    <span class="text">Submit</span>
+  </span>
+</button>
+
+       
     </div>
+    <p id="errorMsg"></p>
     
     <div id="seatInfo">
         <h3>Seat Information</h3>
@@ -194,12 +202,186 @@
                 displayScannedData(studentId);
                 document.getElementById('errorMsg').innerText = '';  // Clear any previous error messages
             } else {
-                document.getElementById('errorMsg').innerText = 'Please enter a valid Student ID in the format 21/es/001.';
+                document.getElementById('errorMsg').innerText = 'Please enter a valid Student ID in the format 21/ES/001.';
             }
         });
 
         startScan();
     });
+
+    function toggleShadow(button) {
+    button.classList.toggle("clicked");
+  }
     </script>
 </body>
 </html>
+<style>
+/* Container for input and button */
+#manualInputContainer {
+  display: flex;
+  align-items: center; /* Center-aligns input and button vertically */
+  gap: 10px; /* Adds spacing between input and button */
+}
+
+/* Input styling */
+.input {
+  width: 200px;
+  height: 35px;
+  padding: 12px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background-color: #fff;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Input focus and hover effects */
+.input:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+  transform: scale(1.02);
+}
+
+.input:hover {
+  background-color: #f0f8ff;
+}
+
+/* Placeholder styling */
+.input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Button styling */
+.btn-17,
+.btn-17 *,
+.btn-17 :after,
+.btn-17 :before,
+.btn-17:after,
+.btn-17:before {
+  border: none;
+  box-sizing: border-box;
+  
+}
+
+.btn-17 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #6f42c1; /* Updated to match your website's purple */
+  color: #fff !important;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 90%;
+  font-weight: 900;
+  line-height: 1.5;
+  
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  height: 35px; /* Matches input height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Button disabled state */
+.btn-17:disabled {
+  cursor: default;
+}
+
+.btn-17:-moz-focusring {
+  outline: auto;
+}
+
+/* Button text container */
+.btn-17 .text-container {
+  display: block;
+  mix-blend-mode: difference;
+}
+
+.btn-17 .text {
+  display: block;
+  position: relative;
+}
+
+/* Button hover animation */
+.btn-17:hover .text {
+  -webkit-animation: move-up-alternate 0.3s forwards;
+  animation: move-up-alternate 0.3s forwards;
+}
+
+@-webkit-keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(80%);
+  }
+  51% {
+    transform: translateY(-80%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(80%);
+  }
+  51% {
+    transform: translateY(-80%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Button hover effects */
+.btn-17:after,
+.btn-17:before {
+  --skew: 0.2;
+  background: #fff;
+  content: "";
+  display: block;
+  height: 102%;
+  left: calc(-50% - 50% * var(--skew));
+  pointer-events: none;
+  position: absolute;
+  top: -104%;
+  transform: skew(calc(150deg * var(--skew))) translateY(var(--progress, 0));
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.btn-17:after {
+  --progress: 0%;
+  left: calc(50% + 50% * var(--skew));
+  top: 102%;
+  z-index: -1;
+}
+
+.btn-17:hover:before {
+  --progress: 100%;
+}
+
+.btn-17:hover:after {
+  --progress: -102%;
+}
+
+
+/* Box shadow applied when clicked */
+.btn-17.clicked {
+    box-shadow: 0 4px 15px rgba(166, 1, 255, 0.3); /* Box shadow on click */
+}
+</style>

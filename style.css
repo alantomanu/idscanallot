@@ -1,8 +1,9 @@
+/* Background gradient */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('images/bag2.jpg'); /* Background image from your folder */
+    background-image: url('images/img1.jpg'); /* Background image from your folder */
     background-size: cover; /* Ensures the image covers the entire background */
     background-position: center; /* Centers the background image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -15,7 +16,6 @@ body {
     text-align: center;
     animation: fadeIn 0.5s ease-in-out;
 }
-
 
 header {
     display: flex;
@@ -34,12 +34,13 @@ header {
     from { transform: translateY(-20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
-#collegeLogo {
-    width: 300px; /* Increase or adjust this value as needed */
-    height: auto; /* This keeps the aspect ratio of the image */
-    margin-right: 15px;
 
+#collegeLogo {
+    width: 300px;
+    height: auto;
+    margin-right: 15px;
 }
+
 h1 {
     font-size: 24px;
     color: #333;
@@ -51,13 +52,14 @@ h2 {
     color: #555;
 }
 
+/* Scanner container */
 #scannerContainer {
     position: relative;
     width: 100%;
     max-width: 300px;
     height: auto;
-    border: 2px solid #ccc;
-    background-color: #000;
+    border: 2px solid #6f42c1; /* Purple accent border */
+    background-color: rgba(255, 255, 255, 0.8); /* Light background to contrast with gradient */
     border-radius: 10px;
     overflow: hidden;
     margin: 20px 0;
@@ -82,7 +84,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: lime;
+    background-color: rgb(80, 249, 201);
     animation: scanning 2s infinite;
 }
 
@@ -92,10 +94,11 @@ h2 {
     100% { top: 0; }
 }
 
+/* Button styles */
 #startScanBtn {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #6f42c1;
     color: white;
     border: none;
     cursor: pointer;
@@ -107,12 +110,13 @@ h2 {
 }
 
 #startScanBtn:hover {
-    background-color: #0056b3;
+    background-color: #5936a3;
 }
 
+/* Seat information container */
 #seatInfo {
     margin-top: 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -138,6 +142,7 @@ h2 {
     color: #666;
 }
 
+/* Seat display */
 #seatDisplay {
     margin-top: 20px;
     width: 100%;
@@ -145,7 +150,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -160,18 +165,18 @@ h2 {
 
 #seatImage {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 columns for the seat numbering */
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     margin-left: 110px;
     width: 100%;
-    justify-content: center; /* Center the seat grid horizontally */
+    justify-content: center;
 }
 
-
+/* Seat styling */
 .seat {
     width: 50px;
     height: 50px;
-    background-color: #ccc;
+    background-color: #ddd;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -186,19 +191,21 @@ h2 {
 }
 
 .occupied {
-    background-color: red;
+    background-color: #e74c3c;
 }
 
+/* Error message styling */
 #errorMsg {
     color: red;
     margin-top: 20px;
     animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
     #scannerContainer {
         max-width: 60%;
-        max-height:100% ;
+        max-height: 100%;
     }
     
     #seatInfo, #seatDisplay {
@@ -206,8 +213,8 @@ h2 {
     }
     
     #collegeLogo {
-        width: 200px; /* Increase or adjust this value as needed */
-        height: auto; /* This keeps the aspect ratio of the image */
+        width: 200px;
+        height: auto;
     }
     
     h1 {
@@ -227,9 +234,10 @@ h2 {
     #seatImage {
         gap: 5px;
     }
-}.error-message {
+}
+
+.error-message {
     color: red;
     font-size: 0.9em;
     margin-top: 5px;
 }
-
