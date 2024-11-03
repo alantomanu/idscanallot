@@ -100,7 +100,7 @@ h2 {
 }
 @media (max-width: 768px) {
     #scannerContainer {
-        max-width: 90%; /* Use more width on smaller screens */
+        max-width: 0%; /* Use more width on smaller screens */
         margin: 20px auto; /* Center with margins */
         padding: 15px; /* Increased padding for better touch targets */
     }
