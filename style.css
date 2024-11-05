@@ -25,7 +25,7 @@
 @media (max-width: 768px) {
     body {
         margin-left: 10px; /* Adjust this value as needed */
-        margin-right: 8px; /* Optional: Add right margin for balance */
+        margin-right: 10px; /* Optional: Add right margin for balance */
     }
     
     /* Ensure containers inside the body also have margin adjustments */
@@ -234,38 +234,73 @@ h2 {
 
 /* Style for occupied seats */
 .occupied {
-    background: linear-gradient(135deg, #e74c3c, #c0392b); /* Red gradient for occupied seats */
+    background: #e74c3c;
     color: #fff;
-    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.5); /* Red-tinted shadow */
-    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; /* Smooth transition */
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.5); /* Red shadow for occupied seats */
+    animation: breathing 1.5s ease-in-out infinite; /* Continuous breathing animation */
 }
-
-/* Hover effect for occupied seats with pulsing */
+/* Hover effect for occupied seats */
+/* Hover effect for occupied seats */
 .occupied:hover {
-    transform: scale(1.05); /* Slight scaling effect */
-    background: linear-gradient(135deg, #ff5e57, #e74c3c); /* Brighter red gradient */
-    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.7); /* Enhanced red shadow */
-    animation: pulseOccupied 0.8s ease-in-out infinite alternate; /* Smooth pulsing animation */
+    background: #e74c3c; /* Red background */
+    color: #ffffff; /* White text for high contrast */
+    font-weight: bold; /* Increased boldness */
+    font-size: 18px; /* Larger font size for emphasis */
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.6); /* Enhanced red shadow for a glow effect */
+    transform: scale(1.1); /* Slight enlargement */
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, font-size 0.3s ease, transform 0.3s ease; /* Smooth transition for all properties */
+    animation: breathing 1.5s ease-in-out infinite; /* Continuous breathing animation */
 }
 
-/* Keyframes for pulsing animation */
-@keyframes pulseOccupied {
-    0% {
-        transform: scale(1.05);
-        box-shadow: 0 6px 15px rgba(231, 76, 60, 0.7);
-    }
-    100% {
+/* Breathing animation for occupied seats */
+@keyframes breathing {
+    0%, 100% {
         transform: scale(1.1);
-        box-shadow: 0 8px 20px rgba(231, 76, 60, 0.9);
+        box-shadow: 0 8px 20px rgba(231, 76, 60, 0.6);
+    }
+    50% {
+        transform: scale(1.15); /* Slightly larger at midpoint */
+        box-shadow: 0 12px 30px rgba(231, 76, 60, 0.8); /* Stronger glow at midpoint */
     }
 }
 
-/* Responsive adjustments for small screens */
+
+
+/* Keyframes for breathing animation */
+@keyframes breathing {
+    0%, 100% {
+        transform: scale(1); /* Normal size */
+        box-shadow: 0 4px 10px rgba(231, 76, 60, 0.5);
+    }
+    50% {
+        transform: scale(1.05); /* Slightly larger */
+        box-shadow: 0 6px 15px rgba(231, 76, 60, 0.7); /* Enhanced shadow */
+    }
+}
+
+/* Add responsive adjustments for small screens */
 @media (max-width: 768px) {
     .seat {
         width: 40px;
         height: 40px;
         font-size: 14px;
+        margin: 3px; /* Add spacing for readability */
+    }
+
+    .occupied {
+        animation: breathing-small 1.5s ease-in-out infinite;
+    }
+}
+
+/* Keyframes for smaller breathing animation on small screens */
+@keyframes breathing-small {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 3px 8px rgba(231, 76, 60, 0.5);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 5px 12px rgba(231, 76, 60, 0.6);
     }
 }
 
