@@ -25,7 +25,7 @@
 @media (max-width: 768px) {
     body {
         margin-left: 10px; /* Adjust this value as needed */
-        margin-right: 10px; /* Optional: Add right margin for balance */
+        margin-right: 8px; /* Optional: Add right margin for balance */
     }
     
     /* Ensure containers inside the body also have margin adjustments */
@@ -214,24 +214,61 @@ h2 {
 .seat {
     width: 50px;
     height: 50px;
-    background-color: #ddd;
+    background: linear-gradient(135deg, #f0f0f0, #dcdcdc); /* Soft gradient background */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     color: #333;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle box shadow */
 }
 
+/* Hover effect */
 .seat:hover {
     transform: scale(1.1);
+    background: linear-gradient(135deg, #ffffff, #e0e0e0); /* Lighten gradient on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
+/* Style for occupied seats */
 .occupied {
-    background-color: #e74c3c;
+    background: linear-gradient(135deg, #e74c3c, #c0392b); /* Red gradient for occupied seats */
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.5); /* Red-tinted shadow */
+    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; /* Smooth transition */
 }
+
+/* Hover effect for occupied seats with pulsing */
+.occupied:hover {
+    transform: scale(1.05); /* Slight scaling effect */
+    background: linear-gradient(135deg, #ff5e57, #e74c3c); /* Brighter red gradient */
+    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.7); /* Enhanced red shadow */
+    animation: pulseOccupied 0.8s ease-in-out infinite alternate; /* Smooth pulsing animation */
+}
+
+/* Keyframes for pulsing animation */
+@keyframes pulseOccupied {
+    0% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(231, 76, 60, 0.7);
+    }
+    100% {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(231, 76, 60, 0.9);
+    }
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+    .seat {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
 
 /* Error message styling */
 #errorMsg {
