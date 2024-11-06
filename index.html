@@ -174,21 +174,44 @@
         }
 
         async function generateSeatImage(hall, selectedRow, selectedColumn, totalRows, totalColumns) {
-            let seatLayout = "";
-            const seatMap = await fetchAllSeatDetails();
+    let seatLayout = "";
+    const seatMap = await fetchAllSeatDetails(); // Assume this provides a map of { "1-1": "1", "1-2": "2", ... }
+    
+    // Assume we have an array of all expected roll numbers
+    const allRollNumbers = Array.from({ length: totalRows * totalColumns }, (_, i) => (i + 1).toString());
+    const assignedRollNumbers = new Set();
 
-            for (let row = 1; row <= totalRows; row++) {
-                for (let column = 1; column <= totalColumns; column++) {
-                    const seatKey = `${row}-${column}`;
-                    const rollNumber = seatMap[seatKey] || '';
-                    let seatClass = (selectedRow === `Row ${row}` && selectedColumn === `Column ${column}`) ? 'seat occupied' : 'seat';
-                    seatLayout += `<div class="${seatClass}">${rollNumber || 'nil'}</div>`;
-                }
-                seatLayout += "<br>";
+    // Generate seat layout
+    for (let row = 1; row <= totalRows; row++) {
+        for (let column = 1; column <= totalColumns; column++) {
+            const seatKey = `${row}-${column}`;
+            const rollNumber = seatMap[seatKey] || ''; // Check if there's a roll number for this seat
+
+            let seatClass = (selectedRow === `Row ${row}` && selectedColumn === `Column ${column}`) ? 'seat occupied' : 'seat';
+            
+            if (rollNumber) {
+                assignedRollNumbers.add(rollNumber); // Track assigned roll numbers
             }
 
-            return seatLayout;
+            seatLayout += `<div class="${seatClass}">${rollNumber || 'nil'}</div>`;
         }
+        seatLayout += "<br>";
+    }
+
+    // Determine absent roll numbers by finding the difference between all and assigned roll numbers
+    const missingRollNumbers = allRollNumbers.filter(rollNumber => !assignedRollNumbers.has(rollNumber));
+
+    // Add missing roll numbers section below the seat layout
+    if (missingRollNumbers.length > 0) {
+    const absenteesList = missingRollNumbers.join(', ');
+    seatLayout += `<div class='missing-roll-numbers'><strong>Permanent Absentees:</strong> ${absenteesList}</div>`;
+}
+
+
+
+    return seatLayout;
+}
+
 
         startScanBtn.addEventListener('click', () => {
             startScan();
@@ -278,6 +301,7 @@
   box-sizing: border-box;
   
 }
+
 
 .btn-17 {
   -webkit-tap-highlight-color: transparent;
