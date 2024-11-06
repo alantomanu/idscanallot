@@ -91,10 +91,18 @@
         <p><strong>Column:</strong> <span id="column">N/A</span></p>
     </div>
     
+    
     <div id="seatDisplay">
-        <h3>Seat Position</h3>
-        <div id="seatImage"></div>
+      <h3>Seat Position</h3>
+      <div id="seatImage"></div>
+      <div id="absenteesListContainer">
+        <h4>Permanent Absentees</h4>
+        <div id="absenteesList"></div>
     </div>
+  </div>
+  
+  
+  
 
     <script>
     document.addEventListener('DOMContentLoaded', (event) => {
@@ -172,12 +180,10 @@
                 console.error(e);
             }
         }
-
         async function generateSeatImage(hall, selectedRow, selectedColumn, totalRows, totalColumns) {
     let seatLayout = "";
-    const seatMap = await fetchAllSeatDetails(); // Assume this provides a map of { "1-1": "1", "1-2": "2", ... }
+    const seatMap = await fetchAllSeatDetails();
     
-    // Assume we have an array of all expected roll numbers
     const allRollNumbers = Array.from({ length: totalRows * totalColumns }, (_, i) => (i + 1).toString());
     const assignedRollNumbers = new Set();
 
@@ -185,12 +191,12 @@
     for (let row = 1; row <= totalRows; row++) {
         for (let column = 1; column <= totalColumns; column++) {
             const seatKey = `${row}-${column}`;
-            const rollNumber = seatMap[seatKey] || ''; // Check if there's a roll number for this seat
+            const rollNumber = seatMap[seatKey] || '';
 
             let seatClass = (selectedRow === `Row ${row}` && selectedColumn === `Column ${column}`) ? 'seat occupied' : 'seat';
-            
+
             if (rollNumber) {
-                assignedRollNumbers.add(rollNumber); // Track assigned roll numbers
+                assignedRollNumbers.add(rollNumber);
             }
 
             seatLayout += `<div class="${seatClass}">${rollNumber || 'nil'}</div>`;
@@ -198,19 +204,33 @@
         seatLayout += "<br>";
     }
 
-    // Determine absent roll numbers by finding the difference between all and assigned roll numbers
+    // Determine absent roll numbers
     const missingRollNumbers = allRollNumbers.filter(rollNumber => !assignedRollNumbers.has(rollNumber));
 
-    // Add missing roll numbers section below the seat layout
-    if (missingRollNumbers.length > 0) {
-    const absenteesList = missingRollNumbers.join(', ');
-    seatLayout += `<div class='missing-roll-numbers'><strong>Permanent Absentees:</strong> ${absenteesList}</div>`;
+    // Return both seat layout and missing roll numbers separately
+    return { seatLayout, missingRollNumbers };
+}
+async function displayScannedData(data) {
+    try {
+        let rollNumber = data.split('/').pop().replace(/^0+/, '');
+        document.getElementById('rollNumber').innerText = rollNumber;
+
+        let seatDetails = await fetchSeatDetails(rollNumber);
+        document.getElementById('hallName').innerText = seatDetails.hall || 'N/A';
+        document.getElementById('row').innerText = seatDetails.row || 'N/A';
+        document.getElementById('column').innerText = seatDetails.column || 'N/A';
+
+        const { seatLayout, missingRollNumbers } = await generateSeatImage(seatDetails.hall, seatDetails.row, seatDetails.column, seatDetails.totalRows, seatDetails.totalColumns);
+        document.getElementById('seatImage').innerHTML = seatLayout;
+
+        // Display missing roll numbers separately
+        document.getElementById('absenteesList').innerText = missingRollNumbers.length ? missingRollNumbers.join(', ') : 'No absentees';
+    } catch (e) {
+        document.getElementById('errorMsg').innerText = "Error processing QR Code data.";
+        console.error(e);
+    }
 }
 
-
-
-    return seatLayout;
-}
 
 
         startScanBtn.addEventListener('click', () => {
@@ -254,6 +274,14 @@
   display: flex;
   align-items: center; /* Center-aligns input and button vertically */
   gap: 10px; /* Adds spacing between input and button */
+}
+#absenteesListContainer {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+}
+#absenteesList {
+    color: #555;
 }
 
 /* Input styling */
