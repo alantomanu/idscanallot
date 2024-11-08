@@ -1,18 +1,15 @@
-# seat 🪑🎒
+# ID Scan Allot 🪑✨
 
-Effortlessly generate and manage seat layouts while keeping track of absentees for organized seating arrangements. Perfect for classrooms, events, and any setup that requires structured seating. 🚀
+A dynamic seat allocation and tracking system that visualizes seating layouts, tracks absentees, and allows for easy seat management. Ideal for organizing classrooms, events, or any seating setup where managing absentees and specific seat allocations is needed.
 
-## Features ✨
-- **Seat Layout Generation**: Generate a seating chart based on selected rows and columns.
-- **Mark Absentees**: Automatically track unassigned or absent roll numbers.
-- **Dynamic Visualization**: View seat arrangements visually with easy-to-understand layout and occupied seats.
-- **Custom Selection**: Select specific rows and columns to highlight occupied seats.
+## Features 🎉
+- **Interactive Seat Layout Generation**: Generate and visualize seat layouts based on specified rows and columns.
+- **Select Specific Seats**: Highlight and identify specific seats effortlessly.
+- **Track Permanent Absentees**: Maintain a list of absentees that updates automatically after each layout generation.
+- **Easy-to-Use Interface**: Simple layout with responsive design for seamless user experience.
 
-## Demo 🎥
-1. **Generate Seat Layout**: Select rows and columns, and see the seating arrangement with assigned seats.
-2. **Absentees Display**: View unassigned roll numbers listed under "Permanent Absentees" after generating the layout.
+## Getting Started 🚀
 
-## How to Use 🛠️
-1. Clone this repository:
+1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/seat-layout-manager.git
+   git clone https://github.com/alantomanu/idscanallot.git
