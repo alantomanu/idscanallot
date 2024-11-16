@@ -157,27 +157,39 @@
     border-radius: 6px;
     background-color: #fafafa;
     color: #444;
-    transition: box-shadow 0.3s, border-color 0.3s;
+    margin-bottom: 15px; /* Spacing below the dropdown */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     appearance: none; /* Removes default arrow for custom styling */
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%236f42c1' d='M2 0L0 2h4z'/%3E%3C/svg%3E"); /* Custom arrow */
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 10px 10px;
-    margin-bottom: 15px;
 }
+
+
 
 select:focus {
     border-color: #6f42c1;
-    box-shadow: 0 0 8px rgba(111, 66, 193, 0.3);
+    box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
     outline: none;
 }
 
-select option {
-    font-size: 15px;
-    color: #333;
-    padding: 10px;
+/* Style for dropdown options on hover */
+select option:hover {
+    background-color: #6f42c1;
+    color: #fff;
 }
 
+/* Ensure option text looks good */
+select option {
+    font-size: 15px;
+    padding: 10px;
+    background-color: #fafafa;
+    color: #333;
+    box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
+}
+
+/* Style for label */
 label[for="examination"] {
     font-size: 14px;
     color: #444;
@@ -186,6 +198,19 @@ label[for="examination"] {
     font-weight: bold;
     display: block;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    select {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    label[for="examination"] {
+        font-size: 13px;
+    }
+}
+
 
     </style>
     
