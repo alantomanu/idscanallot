@@ -149,6 +149,43 @@
                 font-size: 13px;
             }
         }
+        select {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fafafa;
+    color: #444;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    appearance: none; /* Removes default arrow for custom styling */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%236f42c1' d='M2 0L0 2h4z'/%3E%3C/svg%3E"); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 10px;
+}
+
+select:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 8px rgba(111, 66, 193, 0.3);
+    outline: none;
+}
+
+select option {
+    font-size: 15px;
+    color: #333;
+    padding: 10px;
+}
+
+label[for="examination"] {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 8px;
+    text-align: left;
+    font-weight: bold;
+    display: block;
+}
+
     </style>
     
     
