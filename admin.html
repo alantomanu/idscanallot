@@ -244,6 +244,12 @@ label[for="examination"] {
                 .split(',')
                 .map(roll => roll.trim())
                 .map(Number);
+                const examination = document.getElementById('examination').value;
+
+if (!examination) {
+    alert('Please select an examination.');
+    return;
+}
 
             if (isNaN(rows) || isNaN(columns) || isNaN(numStudents) || isNaN(rollNumberStart)) {
                 alert('Please enter valid numbers.');
@@ -276,7 +282,8 @@ label[for="examination"] {
                         row: seatRow,
                         column: seatColumn,
                         totalRows: rows,
-                        totalColumns: columns
+                        totalColumns: columns,
+                        examination: examination // Save the selected examination
                     });
 
                     rollNumber++;
