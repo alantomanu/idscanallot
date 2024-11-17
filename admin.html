@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-    
+
         body {
             display: flex;
             justify-content: center;
@@ -23,34 +24,46 @@
             padding: 20px;
             user-select: none;
         }
-    
+
         h2 {
-    font-size: 28px; /* Adjusted size */
-    font-weight: 600; /* Moderate boldness */
-    color: transparent; /* Required for gradient effect */
-    background: linear-gradient(to right, #6f42c1, #804dce); /* Subtle gradient */
-    background-clip: text; /* Ensures the gradient applies only to the text */
-    -webkit-background-clip: text;
-    text-align: center;
-    margin-bottom: 20px;
-    text-transform: none; /* No forced uppercase */
-    letter-spacing: 0.5px; /* Minimal spacing for refined look */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle depth */
-    animation: glow 1.5s infinite ease-in-out; /* Soft glow effect */
-}
+            font-size: 28px;
+            /* Adjusted size */
+            font-weight: 600;
+            /* Moderate boldness */
+            color: transparent;
+            /* Required for gradient effect */
+            background: linear-gradient(to right, #6f42c1, #804dce);
+            /* Subtle gradient */
+            background-clip: text;
+            /* Ensures the gradient applies only to the text */
+            -webkit-background-clip: text;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: none;
+            /* No forced uppercase */
+            letter-spacing: 0.5px;
+            /* Minimal spacing for refined look */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            /* Subtle depth */
+            animation: glow 1.5s infinite ease-in-out;
+            /* Soft glow effect */
+        }
 
-/* Animation for a softer glow */
-@keyframes glow {
-    0%, 100% {
-        text-shadow: 1px 1px 4px rgba(111, 66, 193, 0.3);
-    }
-    50% {
-        text-shadow: 1px 1px 6px rgba(128, 77, 206, 0.5);
-    }
-}
+        /* Animation for a softer glow */
+        @keyframes glow {
+
+            0%,
+            100% {
+                text-shadow: 1px 1px 4px rgba(111, 66, 193, 0.3);
+            }
+
+            50% {
+                text-shadow: 1px 1px 6px rgba(128, 77, 206, 0.5);
+            }
+        }
 
 
-    
+
         /* Centered Container */
         .container {
             max-width: 400px;
@@ -61,7 +74,7 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
             text-align: center;
         }
-    
+
         label {
             display: block;
             font-size: 14px;
@@ -70,7 +83,7 @@
             text-align: left;
             font-weight: bold;
         }
-    
+
         input[type="number"],
         input[type="text"] {
             width: 100%;
@@ -82,14 +95,14 @@
             background-color: #fafafa;
             transition: box-shadow 0.3s, border-color 0.3s;
         }
-    
+
         input[type="number"]:focus,
         input[type="text"]:focus {
             border-color: #6f42c1;
             box-shadow: 0 0 8px rgba(111, 66, 193, 0.3);
             outline: none;
         }
-    
+
         button {
             width: 100%;
             padding: 12px;
@@ -103,118 +116,120 @@
             transition: background-color 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
-    
+
         button:hover {
             background-color: #5a37a2;
             box-shadow: 0 6px 15px rgba(111, 66, 193, 0.4);
         }
-    
+
         .note {
             font-size: 14px;
             color: #888;
             margin-top: 10px;
             text-align: center;
         }
-    
+
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
-    
+
             .container {
                 padding: 20px;
             }
-    
+
             h2 {
                 font-size: 24px;
             }
-    
+
             label {
                 font-size: 13px;
             }
-    
+
             input[type="number"],
             input[type="text"] {
                 padding: 10px;
                 font-size: 14px;
             }
-    
+
             button {
                 padding: 10px;
                 font-size: 15px;
             }
-    
+
             .note {
                 font-size: 13px;
             }
         }
+
         select {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #fafafa;
-    color: #444;
-    margin-bottom: 15px; /* Spacing below the dropdown */
-    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-    appearance: none; /* Removes default arrow for custom styling */
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%236f42c1' d='M2 0L0 2h4z'/%3E%3C/svg%3E"); /* Custom arrow */
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px 10px;
-}
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fafafa;
+            color: #444;
+            margin-bottom: 15px;
+            /* Spacing below the dropdown */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            appearance: none;
+            /* Removes default arrow for custom styling */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%236f42c1' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
+            /* Custom arrow */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px 10px;
+        }
 
 
 
-select:focus {
-    border-color: #6f42c1;
-    box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
-    outline: none;
-}
+        select:focus {
+            border-color: #6f42c1;
+            box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
+            outline: none;
+        }
 
-/* Style for dropdown options on hover */
-select option:hover {
-    background-color: #6f42c1;
-    color: #fff;
-}
+        /* Style for dropdown options on hover */
+        select option:hover {
+            background-color: #6f42c1;
+            color: #fff;
+        }
 
-/* Ensure option text looks good */
-select option {
-    font-size: 15px;
-    padding: 10px;
-    background-color: #fafafa;
-    color: #333;
-    box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
-}
+        /* Ensure option text looks good */
+        select option {
+            font-size: 15px;
+            padding: 10px;
+            background-color: #fafafa;
+            color: #333;
+            box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
+        }
 
-/* Style for label */
-label[for="examination"] {
-    font-size: 14px;
-    color: #444;
-    margin-bottom: 8px;
-    text-align: left;
-    font-weight: bold;
-    display: block;
-}
+        /* Style for label */
+        label[for="examination"] {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 8px;
+            text-align: left;
+            font-weight: bold;
+            display: block;
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    select {
-        font-size: 14px;
-        padding: 8px 10px;
-    }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            select {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
 
-    label[for="examination"] {
-        font-size: 13px;
-    }
-}
-
-
+            label[for="examination"] {
+                font-size: 13px;
+            }
+        }
     </style>
-    
-    
+
+
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
@@ -235,7 +250,7 @@ label[for="examination"] {
         const db = getFirestore(app);
 
         // Function to generate and save seats with skipping absent roll numbers
-        window.generateAndSaveSeats = async function() {
+        window.generateAndSaveSeats = async function () {
             const rows = parseInt(document.getElementById('rows').value);
             const columns = parseInt(document.getElementById('columns').value);
             const numStudents = parseInt(document.getElementById('numStudents').value);
@@ -244,12 +259,12 @@ label[for="examination"] {
                 .split(',')
                 .map(roll => roll.trim())
                 .map(Number);
-                const examination = document.getElementById('examination').value;
+            const examination = document.getElementById('examination').value;
 
-if (!examination) {
-    alert('Please select an examination.');
-    return;
-}
+            if (!examination) {
+                alert('Please select an examination.');
+                return;
+            }
 
             if (isNaN(rows) || isNaN(columns) || isNaN(numStudents) || isNaN(rollNumberStart)) {
                 alert('Please enter valid numbers.');
@@ -295,17 +310,18 @@ if (!examination) {
         }
     </script>
 </head>
+
 <body>
     <div class="container">
         <h2> Seat Allocation</h2>
         <label for="examination">Choose Examination:</label>
-<select id="examination">
-    <option value="" disabled selected>Select Examination</option>
-    <option value="Internal Examination 1">Internal Examination 1</option>
-    <option value="Internal Examination 2">Internal Examination 2</option>
-    <option value="Odd Semester Examination">Odd Semester Examination</option>
-    <option value="Even Semester Examination">Even Semester Examination</option>
-</select>
+        <select id="examination">
+            <option value="" disabled selected>Select Examination</option>
+            <option value="Internal Examination 1">Internal Examination 1</option>
+            <option value="Internal Examination 2">Internal Examination 2</option>
+            <option value="Odd Semester Examination">Odd Semester Examination</option>
+            <option value="Even Semester Examination">Even Semester Examination</option>
+        </select>
 
         <label for="rows">Number of Rows:</label>
         <input type="number" id="rows" placeholder="Enter number of rows">
@@ -319,7 +335,7 @@ if (!examination) {
         <label for="rollNumberStart">Starting Roll Number:</label>
         <input type="number" id="rollNumberStart" placeholder="Enter starting roll number">
 
-        <label for="absentRolls">Permenent Absent Roll Numbers <br>                          (comma-separated):</label>
+        <label for="absentRolls">Permenent Absent Roll Numbers <br> (comma-separated):</label>
         <input type="text" id="absentRolls" placeholder="e.g., 4, 7, 10">
 
         <button onclick="generateAndSaveSeats()">Generate Seats</button>
@@ -327,4 +343,5 @@ if (!examination) {
         <p class="note">Ensure all fields are filled accurately.</p>
     </div>
 </body>
+
 </html>
