@@ -50,6 +50,41 @@
 
             return seatMap;
         };
+        document.addEventListener("DOMContentLoaded", () => {
+    loadExaminations();
+});
+async function loadExaminations() {
+        try {
+            const examinationDisplay = document.getElementById("examinationDisplay");
+
+            if (!examinationDisplay) {
+                console.error("Element with ID 'examinationDisplay' not found in the DOM.");
+                return;
+            }
+
+            const querySnapshot = await getDocs(collection(db, "seats"));
+            const examinations = new Set();
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.examination) {
+                    examinations.add(data.examination);
+                }
+            });
+
+            if (examinations.size === 0) {
+                examinationDisplay.innerText = "No examinations found.";
+            } else {
+                examinationDisplay.innerText = [...examinations].join(", ");
+            }
+        } catch (error) {
+            console.error("Error loading examinations:", error);
+            document.getElementById("examinationDisplay").innerText = "Error loading examination.";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadExaminations);
+
     </script>
 </head>
 <body>
@@ -58,7 +93,8 @@
     </header>
     
     <h2>Scan QR Code to View Your Seat or Enter Student ID</h2>
-    
+    <div id="examinationDisplay">Loading examinations...</div>
+
     <div id="scannerContainer">
         <video id="preview" autoplay></video>
         <div class="scanning-line" id="scanningLine"></div>
@@ -264,6 +300,7 @@ async function displayScannedData(data) {
     setTimeout(() => {
         onQRCodeDetected(); // Call the function after 5 seconds for demo purposes
     }, 5000);
+   
     </script>
 </body>
 </html>
