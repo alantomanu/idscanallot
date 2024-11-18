@@ -54,36 +54,39 @@
     loadExaminations();
 });
 async function loadExaminations() {
-        try {
-            const examinationDisplay = document.getElementById("examinationDisplay");
+    try {
+        const examinationDisplay = document.getElementById("examinationDisplay");
 
-            if (!examinationDisplay) {
-                console.error("Element with ID 'examinationDisplay' not found in the DOM.");
-                return;
-            }
-
-            const querySnapshot = await getDocs(collection(db, "seats"));
-            const examinations = new Set();
-
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                if (data.examination) {
-                    examinations.add(data.examination);
-                }
-            });
-
-            if (examinations.size === 0) {
-                examinationDisplay.innerText = "No examinations found.";
-            } else {
-                examinationDisplay.innerText = [...examinations].join(", ");
-            }
-        } catch (error) {
-            console.error("Error loading examinations:", error);
-            document.getElementById("examinationDisplay").innerText = "Error loading examination.";
+        if (!examinationDisplay) {
+            console.error("Element with ID 'examinationDisplay' not found in the DOM.");
+            return;
         }
-    }
 
-    document.addEventListener("DOMContentLoaded", loadExaminations);
+        const querySnapshot = await getDocs(collection(db, "seats"));
+        const examinations = new Set();
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.examination) {
+                examinations.add(data.examination);
+            }
+        });
+
+        // Check if any examinations are found
+        if (examinations.size === 0) {
+            examinationDisplay.innerText = "No examinations found.";
+        } else {
+            // Display a sentence for each examination
+            examinationDisplay.innerText = `Consolidated seating arrangement for: ${[...examinations].join(", ")}`;
+        }
+    } catch (error) {
+        console.error("Error loading examinations:", error);
+        document.getElementById("examinationDisplay").innerText = "Error loading examination.";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadExaminations);
+
 
     </script>
 </head>
