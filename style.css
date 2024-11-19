@@ -355,7 +355,7 @@ h2 {
 #examinationDisplay {
     margin-top: 20px;
     width: 100%;
-    max-width: 350px;
+    max-width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -373,10 +373,11 @@ h2 {
 #examinationDisplay span:first-child {
     font-weight: bold; /* Highlight the title */
     font-size: 20px; /* Slightly larger font for the title */
+    margin-bottom: 4px;
 }
 
 #examinationDisplay span:last-child {
     font-weight: bold;
-    font-size: 16px; /* Regular size for the list */
-    color: #555; /* Slightly lighter gray for differentiation */
+    font-size: 16px;
+    color: #666; /* Slightly lighter gray for differentiation */
 }
