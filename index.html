@@ -76,8 +76,22 @@ async function loadExaminations() {
         if (examinations.size === 0) {
             examinationDisplay.innerText = "No examinations found.";
         } else {
-            // Display a sentence for each examination
-            examinationDisplay.innerText = `Consolidated seating arrangement for: ${[...examinations].join(", ")}`;
+            // Clear any previous content
+            examinationDisplay.innerHTML = "";
+
+            // Create and style the first line
+            const title = document.createElement("span");
+            title.innerText = "Consolidated seating arrangement for:";
+            title.style.display = "block"; // Ensure it stays on one line
+
+            // Create and style the second line
+            const list = document.createElement("span");
+            list.innerText = [...examinations].join(", ");
+            list.style.display = "block"; // Ensure it stays on its own line
+
+            // Append both to the examinationDisplay
+            examinationDisplay.appendChild(title);
+            examinationDisplay.appendChild(list);
         }
     } catch (error) {
         console.error("Error loading examinations:", error);
