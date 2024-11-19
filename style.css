@@ -352,3 +352,18 @@ h2 {
     font-size: 0.9em;
     margin-top: 5px;
 }
+#examinationDisplay {
+    color: white;
+    background-color: #6f42c1;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  
+  #examinationDisplay span:first-child {
+    font-weight: bold; /* Bold the first line */
+  }
+  
