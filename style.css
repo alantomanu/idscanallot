@@ -355,7 +355,7 @@ h2 {
 #examinationDisplay {
     margin-top: 20px;
     width: 100%;
-    max-width: 500px;
+    max-width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
