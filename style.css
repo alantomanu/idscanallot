@@ -364,7 +364,7 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     animation: fadeInUp 0.7s ease-in-out;
-    color: #333; /* Dark gray text color for good contrast */
+    color: #444; /* Dark gray text color for good contrast */
     font-family: Arial, sans-serif;
     text-align: center;
     line-height: 1.6; /* Adds line spacing for readability */
@@ -372,10 +372,11 @@ h2 {
 
 #examinationDisplay span:first-child {
     font-weight: bold; /* Highlight the title */
-    font-size: 18px; /* Slightly larger font for the title */
+    font-size: 20px; /* Slightly larger font for the title */
 }
 
 #examinationDisplay span:last-child {
+    font-weight: bold;
     font-size: 16px; /* Regular size for the list */
     color: #555; /* Slightly lighter gray for differentiation */
 }
