@@ -380,21 +380,35 @@ h2 {
     font-weight: bold;
     font-size: 16px;
     color: #666;
-    opacity: 0; /* Start fully transparent */
-    transform: translateY(20px); /* Start slightly below its final position */
-    animation: fadeSlideIn 1.5s ease-out forwards;
+    overflow: hidden;
+    white-space: nowrap; /* Ensures the text is in a single line */
+    display: inline-block;
+    animation: slideInOut 10s linear infinite; /* Infinite loop */
 }
 
-@keyframes fadeSlideIn {
-    from {
+@keyframes slideInOut {
+    0% {
+        transform: translateX(100%); /* Start off-screen to the right */
         opacity: 0;
-        transform: translateY(20px);
     }
-    to {
+    10% {
+        transform: translateX(0); /* Fully visible and centered */
         opacity: 1;
-        transform: translateY(0);
+    }
+    50% {
+        transform: translateX(0); /* Stay in the center */
+        opacity: 1;
+    }
+    60% {
+        transform: translateX(-100%); /* Start moving off-screen to the left */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-100%); /* Completely off-screen to the left */
+        opacity: 0;
     }
 }
+
 
 
 /* Responsive adjustments for smaller screens */
