@@ -385,17 +385,17 @@ h2 {
 /* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
     #examinationDisplay {
-        max-width: 90%; /* Reduce the width to fit smaller screens */
+        max-width: 60%; /* Reduce the width to fit smaller screens */
         padding: 10px; /* Decrease padding for compact view */
         border-radius: 8px; /* Slightly smaller border radius */
     }
 
     #examinationDisplay span:first-child {
-        font-size: 16px; /* Reduce font size for the title */
+        font-size: 18px; /* Reduce font size for the title */
     }
 
     #examinationDisplay span:last-child {
-        font-size: 14px; /* Reduce font size for the content */
+        font-size: 16px; /* Reduce font size for the content */
     }
 }
 
