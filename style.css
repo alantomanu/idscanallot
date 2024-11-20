@@ -379,8 +379,23 @@ h2 {
 #examinationDisplay span:last-child {
     font-weight: bold;
     font-size: 16px;
-    color: #666; /* Slightly lighter gray for differentiation */
+    color: #666;
+    opacity: 0; /* Start fully transparent */
+    transform: translateY(20px); /* Start slightly below its final position */
+    animation: fadeSlideIn 1.5s ease-out forwards;
 }
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
