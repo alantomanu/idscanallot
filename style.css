@@ -383,7 +383,8 @@ h2 {
     overflow: hidden;
     white-space: nowrap; /* Ensures the text is in a single line */
     display: inline-block;
-    animation: slideInOut 10s linear infinite; /* Infinite loop */
+    animation: slideInOut 10s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+
 }
 
 @keyframes slideInOut {
@@ -414,7 +415,7 @@ h2 {
 /* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
     #examinationDisplay {
-        max-width: 50%; /* Reduce the width to fit smaller screens */
+        max-width: 70%; /* Reduce the width to fit smaller screens */
         padding: 10px; /* Decrease padding for compact view */
         border-radius: 8px; /* Slightly smaller border radius */
     }
