@@ -385,7 +385,7 @@ h2 {
 /* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
     #examinationDisplay {
-        max-width: 60%; /* Reduce the width to fit smaller screens */
+        max-width: 50%; /* Reduce the width to fit smaller screens */
         padding: 10px; /* Decrease padding for compact view */
         border-radius: 8px; /* Slightly smaller border radius */
     }
