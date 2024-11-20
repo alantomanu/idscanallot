@@ -360,7 +360,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     background: linear-gradient(135deg, rgb(196, 230, 244) 0%, #faecff 100%);
-    padding: 12px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     animation: fadeInUp 0.7s ease-in-out;
@@ -372,7 +372,7 @@ h2 {
 
 #examinationDisplay span:first-child {
     font-weight: bold; /* Highlight the title */
-    font-size: 20px; /* Slightly larger font for the title */
+    font-size: 18px; /* Slightly larger font for the title */
     margin-bottom: 4px;
 }
 
