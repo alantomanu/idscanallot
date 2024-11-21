@@ -384,7 +384,6 @@ h2 {
     white-space: nowrap; /* Ensures the text is in a single line */
     display: inline-block;
     animation: slideInOut 10s linear infinite; /* Infinite loop */
-
 }
 
 @keyframes slideInOut {
@@ -404,11 +403,16 @@ h2 {
         transform: translateX(-70%); /* Start moving off-screen to the left */
         opacity: 0;
     }
+    70% {
+        transform: translateX(-100%); /* Move further off-screen quickly */
+        opacity: 0;
+    }
     100% {
-        transform: translateX(-100%); /* Completely off-screen to the left */
+        transform: translateX(100%); /* Quickly return to the start position */
         opacity: 0;
     }
 }
+
 
 
 
