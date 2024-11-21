@@ -388,7 +388,7 @@ h2 {
 
 @keyframes slideInOut {
     0% {
-        transform: translateX(70%); /* Start off-screen to the right */
+        transform: translateX(100%); /* Start off-screen to the right */
         opacity: 0;
     }
     10% {
@@ -400,15 +400,15 @@ h2 {
         opacity: 1;
     }
     60% {
-        transform: translateX(-70%); /* Start moving off-screen to the left */
+        transform: translateX(-100%); /* Move off-screen to the left */
         opacity: 0;
     }
-    70% {
-        transform: translateX(-100%); /* Move further off-screen quickly */
+    61% {
+        transform: translateX(100%); /* Instantly move to the starting point */
         opacity: 0;
     }
     100% {
-        transform: translateX(100%); /* Quickly return to the start position */
+        transform: translateX(100%); /* Prepare for the next cycle */
         opacity: 0;
     }
 }
