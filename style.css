@@ -409,6 +409,38 @@ h2 {
     }
 }
 
+/* Media query for small screens */
+@media (max-width: 768px) {
+    #examinationDisplay span:last-child {
+        font-size: 14px; /* Adjust font size for smaller screens */
+        animation: slideInOutSmall 10s linear infinite; /* New animation for small screens */
+    }
+
+    @keyframes slideInOutSmall {
+        0% {
+            transform: translateX(40%); /* Start further off-screen for smaller screens */
+            opacity: 0;
+        }
+        10% {
+            transform: translateX(10%); /* Fully visible but slightly shifted in */
+            opacity: 1;
+        }
+        50% {
+            transform: translateX(10%); /* Stay visible and centered */
+            opacity: 1;
+        }
+        60% {
+            transform: translateX(-40%); /* Move completely off-screen to the left */
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(100%); /* Reset for the next cycle */
+            opacity: 0;
+        }
+    }
+}
+
+
 
 
 
