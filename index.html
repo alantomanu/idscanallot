@@ -100,38 +100,28 @@ async function loadExaminations() {
 }
 
 document.addEventListener("DOMContentLoaded", loadExaminations);
-
-
     </script>
 </head>
 <body>
     <header>
         <img src="images/logo.png" alt="College Logo sjcet" id="collegeLogo">
     </header>
-    
     <h2>Scan QR Code to View Your Seat or Enter Student ID</h2>
-    
-
     <div id="scannerContainer">
         <video id="preview" autoplay></video>
         <div class="scanning-line" id="scanningLine"></div>
         <div id="scanOutput">Scan the QR code to display seat information</div>
         <button id="startScanBtn">Scan New QR Code</button>
     </div>
-
     <!-- Manual Input for Student ID -->
     <h3>Enter Student ID</h3>
-    <div id="manualInputContainer">
-        
-       
+    <div id="manualInputContainer">  
         <input placeholder="enter student id..." id="studentIdInput" class="input" name="text" type="text" />   
 <button class="btn-17" id="submitStudentIdBtn"  onclick="toggleShadow(this)">
   <span class="text-container">
     <span class="text">Submit</span>
   </span>
-</button>
-
-       
+</button>   
     </div>
     <p id="errorMsg"></p>
     <div id="examinationDisplay"><h2>Loading examinations...</h2></div>
@@ -142,8 +132,6 @@ document.addEventListener("DOMContentLoaded", loadExaminations);
         <p><strong>Row:</strong> <span id="row">N/A</span></p>
         <p><strong>Column:</strong> <span id="column">N/A</span></p>
     </div>
-    
-    
     <div id="seatDisplay">
       <h3>Seat Position</h3>
       <div id="seatImage"></div>
@@ -152,10 +140,6 @@ document.addEventListener("DOMContentLoaded", loadExaminations);
         <div id="absenteesList"></div>
     </div>
   </div>
-  
-  
-  
-
     <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         let video = document.getElementById('preview');
@@ -282,9 +266,6 @@ async function displayScannedData(data) {
         console.error(e);
     }
 }
-
-
-
         startScanBtn.addEventListener('click', () => {
             startScan();
         });
@@ -352,25 +333,21 @@ async function displayScannedData(data) {
   box-sizing: border-box;
   text-transform: uppercase; /* Displays text in uppercase */
 }
-
 /* Input focus and hover effects */
 .input:focus {
   border-color: #2980b9;
   box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
   transform: scale(1.02);
 }
-
 .input:hover {
   background-color: #f0f8ff;
 }
-
 /* Placeholder styling */
 .input::placeholder {
   color: #aaa;
   font-style: italic;
   text-transform: lowercase; /* Displays text in uppercase */
 }
-
 /* Button styling */
 .btn-17,
 .btn-17 *,
@@ -382,8 +359,6 @@ async function displayScannedData(data) {
   box-sizing: border-box;
   
 }
-
-
 .btn-17 {
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: button;
@@ -396,7 +371,6 @@ async function displayScannedData(data) {
   font-size: 90%;
   font-weight: 900;
   line-height: 1.5;
-  
   border-radius: 50px;
   padding: 0.5rem 1.5rem;
   height: 35px; /* Matches input height */
@@ -412,17 +386,14 @@ async function displayScannedData(data) {
 .btn-17:disabled {
   cursor: default;
 }
-
 .btn-17:-moz-focusring {
   outline: auto;
 }
-
 /* Button text container */
 .btn-17 .text-container {
   display: block;
   mix-blend-mode: difference;
 }
-
 .btn-17 .text {
   display: block;
   position: relative;
@@ -495,8 +466,6 @@ async function displayScannedData(data) {
 .btn-17:hover:after {
   --progress: -102%;
 }
-
-
 /* Box shadow applied when clicked */
 .btn-17.clicked {
     box-shadow: 0 4px 15px rgba(166, 1, 255, 0.3); /* Box shadow on click */
