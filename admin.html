@@ -273,7 +273,26 @@
 
             alert('Seats generated and saved successfully!');
         }
-        
+        const dropdown = document.getElementById("dropdown");
+        const button = dropdown.querySelector("button");
+        const options = dropdown.querySelectorAll(".dropdown-options div");
+
+        button.addEventListener("click", () => {
+            dropdown.classList.toggle("open");
+        });
+
+        options.forEach(option => {
+            option.addEventListener("click", () => {
+                button.textContent = option.textContent;
+                dropdown.classList.remove("open");
+            });
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove("open");
+            }
+        });
     </script>
 </head>
 
