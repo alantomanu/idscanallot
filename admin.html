@@ -61,7 +61,6 @@
                 text-shadow: 1px 1px 6px rgba(128, 77, 206, 0.5);
             }
         }
-        /* Centered Container */
         .container {
             max-width: 400px;
             width: 100%;
@@ -126,100 +125,75 @@
             text-align: center;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                padding: 20px;
-            }
-
-            h2 {
-                font-size: 24px;
-            }
-
-            label {
-                font-size: 13px;
-            }
-
-            input[type="number"],
-            input[type="text"] {
-                padding: 10px;
-                font-size: 14px;
-            }
-
-            button {
-                padding: 10px;
-                font-size: 15px;
-            }
-
-            .note {
-                font-size: 13px;
-            }
+        /* Custom Dropdown Styles */
+        .custom-dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 20px;
         }
 
-        select {
+        .custom-dropdown select {
+            display: none;
+        }
+
+        .custom-dropdown button {
             width: 100%;
             padding: 10px 15px;
             font-size: 15px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
             background-color: #fafafa;
             color: #444;
-            margin-bottom: 15px;
-            /* Spacing below the dropdown */
-            transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-            appearance: none;
-            /* Removes default arrow for custom styling */
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%236f42c1' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
-            /* Custom arrow */
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 10px 10px;
-        }
-        select:focus {
-            border-color: #6f42c1;
-            box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
-            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            position: relative;
         }
 
-        /* Style for dropdown options on hover */
-        select option:hover {
+        .custom-dropdown button:after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6f42c1;
+        }
+
+        .dropdown-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .dropdown-options div {
+            padding: 10px;
+            font-size: 15px;
+            color: #444;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-options div:hover {
             background-color: #6f42c1;
             color: #fff;
         }
 
-        /* Ensure option text looks good */
-        select option {
-            font-size: 15px;
-            padding: 10px;
-            background-color: #fafafa;
-            color: #333;
-            box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
+        .dropdown-options div.active {
+            background-color: #6f42c1;
+            color: #fff;
         }
 
-        /* Style for label */
-        label[for="examination"] {
-            font-size: 14px;
-            color: #444;
-            margin-bottom: 8px;
-            text-align: left;
-            font-weight: bold;
+        .custom-dropdown.open .dropdown-options {
             display: block;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            select {
-                font-size: 14px;
-                padding: 8px 10px;
-            }
-
-            label[for="examination"] {
-                font-size: 13px;
-            }
         }
     </style>
     <script type="module">
@@ -305,15 +279,17 @@
 
 <body>
     <div class="container">
-        <h2> Seat Allocation</h2>
+        <h2>Seat Allocation</h2>
         <label for="examination">Choose Examination:</label>
-        <select id="examination">
-            <option value="" disabled selected>Select Examination</option>
-            <option value="Internal Examination I">Internal Examination I</option>
-            <option value="Internal Examination II">Internal Examination II</option>  
-            <option value="Odd Semester Examination">Odd Semester Examination</option>
-            <option value="Even Semester Examination">Even Semester Examination</option>
-        </select>
+        <div class="custom-dropdown" id="dropdown">
+            <button>Select Examination</button>
+            <div class="dropdown-options">
+                <div data-value="Internal Examination I">Internal Examination I</div>
+                <div data-value="Internal Examination II">Internal Examination II</div>
+                <div data-value="Odd Semester Examination">Odd Semester Examination</div>
+                <div data-value="Even Semester Examination">Even Semester Examination</div>
+            </div>
+        </div>
 
         <label for="rows">Number of Rows:</label>
         <input type="number" id="rows" placeholder="Enter number of rows">
@@ -327,11 +303,10 @@
         <label for="rollNumberStart">Starting Roll Number:</label>
         <input type="number" id="rollNumberStart" placeholder="Enter starting roll number">
 
-        <label for="absentRolls">Permenent Absent Roll Numbers <br> (comma-separated):</label>
+        <label for="absentRolls">Permanent Absent Roll Numbers <br> (comma-separated):</label>
         <input type="text" id="absentRolls" placeholder="e.g., 4, 7, 10">
 
         <button onclick="generateAndSaveSeats()">Generate Seats</button>
-
         <p class="note">Ensure all fields are filled accurately.</p>
     </div>
 </body>
