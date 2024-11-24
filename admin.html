@@ -124,77 +124,95 @@
             margin-top: 10px;
             text-align: center;
         }
-
-        /* Custom Dropdown Styles */
         .custom-dropdown {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-            margin-bottom: 20px;
-        }
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 20px;
+    }
 
-        .custom-dropdown select {
-            display: none;
-        }
+    .custom-dropdown button {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(135deg, #6f42c1, #4e2a97);
+        border: none;
+        border-radius: 8px;
+        text-align: left;
+        cursor: pointer;
+        position: relative;
+        transition: background 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 10px rgba(111, 66, 193, 0.3);
+    }
 
-        .custom-dropdown button {
-            width: 100%;
-            padding: 10px 15px;
-            font-size: 15px;
-            background-color: #fafafa;
-            color: #444;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            text-align: left;
-            cursor: pointer;
-            position: relative;
-        }
+    .custom-dropdown button:hover {
+        background: linear-gradient(135deg, #804dce, #5a37a2);
+        box-shadow: 0 6px 12px rgba(111, 66, 193, 0.4);
+    }
 
-        .custom-dropdown button:after {
-            content: '▼';
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6f42c1;
-        }
+    .custom-dropdown button:after {
+        content: '▼';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #fff;
+        transition: transform 0.3s;
+    }
 
-        .dropdown-options {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            max-height: 200px;
-            overflow-y: auto;
-        }
+    .custom-dropdown.open button:after {
+        transform: translateY(-50%) rotate(180deg);
+    }
 
-        .dropdown-options div {
-            padding: 10px;
-            font-size: 15px;
-            color: #444;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    .dropdown-options {
+        display: none;
+        position: absolute;
+        top: 110%;
+        left: 0;
+        width: 100%;
+        background: #343a40;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+        overflow: hidden;
+        animation: fadeIn 0.3s ease-out;
+    }
 
-        .dropdown-options div:hover {
-            background-color: #6f42c1;
-            color: #fff;
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
         }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-        .dropdown-options div.active {
-            background-color: #6f42c1;
-            color: #fff;
-        }
+    .dropdown-options div {
+        padding: 12px 15px;
+        font-size: 15px;
+        color: #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-        .custom-dropdown.open .dropdown-options {
-            display: block;
-        }
+    .dropdown-options div:hover {
+        background: linear-gradient(135deg, #6f42c1, #4e2a97);
+        color: #fff;
+    }
+
+    .dropdown-options div.active {
+        background: linear-gradient(135deg, #804dce, #5a37a2);
+        color: #fff;
+    }
+
+    .custom-dropdown.open .dropdown-options {
+        display: block;
+    }
     </style>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
