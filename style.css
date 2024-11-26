@@ -460,4 +460,49 @@ h2 {
         font-size: 16px; /* Reduce font size for the content */
     }
 }
+footer {
+    background-color: #343a40; /* Dark theme background */
+    color: #fff; /* Text color */
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#footerContent p {
+    margin: 0;
+    font-size: 14px;
+}
+
+#footerLinks {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    display: inline-flex;
+    gap: 15px;
+}
+
+#footerLinks li {
+    display: inline;
+}
+
+#footerLinks a {
+    color: #6f42c1; /* Purple accent */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#footerLinks a:hover {
+    color: #9b69d3; /* Lighter purple */
+}
+
+#socialIcons a {
+    margin: 0 10px;
+    color: #6f42c1;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+#socialIcons a:hover {
+    color: #9b69d3;
+}
 
