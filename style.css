@@ -465,11 +465,13 @@ footer {
     padding: 20px 0;
     text-align: center;
     margin-top: 30px;
+    font-weight: 100px;
+    
 }
 
 #footerContent p {
     margin: 0;
-    font-size: 14px;
+    font-size: 17px;
 }
 
 #footerLinks {
