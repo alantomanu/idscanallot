@@ -496,37 +496,32 @@ footer {
     color: #9b69d3; /* Lighter purple */
 }
 
-#socialIcons a {
-    margin: 0 10px;
-    color: #c14242;
-    font-size: 18px;
-    transition: color 0.3s;
-}
-
-#socialIcons a:hover {
-    color: #9b69d3;
-}
-/* Basic styling for social icons */
+/* Styling for social icons */
 #socialIcons {
     display: flex;
     justify-content: center; /* Center the icons horizontally */
-    gap: 15px; /* Space between icons */
-    margin-top: 20px;
+    gap: 20px; /* Add more space between icons */
+    margin-top: 30px;
 }
 
 #socialIcons a {
-    text-decoration: none; /* Remove the underline from links */
-    font-size: 24px; /* Set a larger size for icons */
-    color: #c14242; /* Initial icon color */
-    transition: color 0.3s, transform 0.3s; /* Smooth transition for color and scale effect */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 30px; /* Slightly smaller icons */
+    color: #9b69d3; /* Set a smooth purple base color */
+    transition: all 0.3s ease-in-out; /* Smooth transition for all changes */
+    border-radius: 50%; /* Round the icon containers */
+    padding: 10px; /* Add padding inside for better spacing */
+    background-color: rgba(0, 0, 0, 0.1); /* Slight background color for contrast */
 }
 
 #socialIcons a:hover {
-    color: #9b69d3; /* Change color on hover */
-    transform: scale(1.2); /* Slight zoom effect on hover */
+    color: #fff; /* Change icon color to white on hover */
+    background-color: #9b69d3; /* Background color turns purple on hover */
+    transform: scale(1.2); /* Zoom effect for a more interactive feel */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect for better aesthetics */
 }
 
 #socialIcons i {
-    font-size: 36px; /* Icon size */
+    font-size: 40px; /* Adjust icon size */
 }
 
