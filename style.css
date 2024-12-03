@@ -501,12 +501,12 @@ footer {
     display: flex;
     justify-content: center; /* Center the icons horizontally */
     gap: 20px; /* Add more space between icons */
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 #socialIcons a {
     text-decoration: none; /* Remove underline from links */
-    font-size: 30px; /* Slightly smaller icons */
+    font-size: 10px; /* Slightly smaller icons */
     color: #9b69d3; /* Set a smooth purple base color */
     transition: all 0.3s ease-in-out; /* Smooth transition for all changes */
     border-radius: 50%; /* Round the icon containers */
@@ -522,6 +522,6 @@ footer {
 }
 
 #socialIcons i {
-    font-size: 40px; /* Adjust icon size */
+    font-size: 20px; /* Adjust icon size */
 }
 
