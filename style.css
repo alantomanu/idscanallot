@@ -517,7 +517,7 @@ footer {
 #socialIcons a:hover {
     color: #fff; /* Change icon color to white on hover */
     background-color: #9b69d3; /* Background color turns purple on hover */
-    transform: scale(1.2); /* Zoom effect for a more interactive feel */
+    transform: scale(1.1); /* Zoom effect for a more interactive feel */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect for better aesthetics */
 }
 
