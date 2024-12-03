@@ -506,4 +506,27 @@ footer {
 #socialIcons a:hover {
     color: #9b69d3;
 }
+/* Basic styling for social icons */
+#socialIcons {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+    gap: 15px; /* Space between icons */
+    margin-top: 20px;
+}
+
+#socialIcons a {
+    text-decoration: none; /* Remove the underline from links */
+    font-size: 24px; /* Set a larger size for icons */
+    color: #c14242; /* Initial icon color */
+    transition: color 0.3s, transform 0.3s; /* Smooth transition for color and scale effect */
+}
+
+#socialIcons a:hover {
+    color: #9b69d3; /* Change color on hover */
+    transform: scale(1.2); /* Slight zoom effect on hover */
+}
+
+#socialIcons i {
+    font-size: 36px; /* Icon size */
+}
 
